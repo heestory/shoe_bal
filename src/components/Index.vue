@@ -1,16 +1,33 @@
 <template>
   <div id="container">
-    <header>
-      <h2>logo</h2>
-      <div class="title">
-        <h1>Administer</h1>
+    <header class="container-fluid center">
+      <div class="row title">
+        <h2 class="col-lg-2">logo</h2>
+        <h1 class="col-lg-8">Shoebal</h1>
       </div>
     </header>
     <nav></nav>
     <section>
+      <figure class="vid">
+        <video loop autoplay>
+          <source src="../assets/nike.mp4" type="video/mp4"/>
+        </video>
+      </figure>
       <article>
-        ID: <input type="text" value="" placeholder="Enter your ID"/><br>
-        PW: <input type="text" value="" placeholder="Enter your ID"/>
+        <form action="">
+          <div class="form-group">
+            <label for="ID">ID:</label>
+            <input type="text" class="form-control" id="ID">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+          </div>
+          <button router-link to="dash" type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
       </article>
     </section>
@@ -18,16 +35,23 @@
 </template>
 
 <script>
+
+  import 'bootstrap/dist/css/bootstrap.css'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
+
     export default {
         name: ""
     }
 </script>
 
 <style scoped>
-  header{position:fixed; width:15%; height: 100%; background:#fff; top:0px; left:0px;}
+  header{position:fixed; width:15%; height: 100%; background:#fff; top:10px; left:0px;}
   nav{position:relative; width:85%; height:35px; background:#212121; margin-left:15%;}
   section{width:85%; position:relative; margin-left:15%;}
-  article{width:60%; height:300px; position:absolute; top:20%; left:20%; background: white}
+  .vid{width:100%; height:100%; position:fixed; top:80px; left:0px; opacity: 0.9;}
+  .vid video{width:100%; min-width:1600px;}
+  article{width:60%; height:300px; position:absolute; top:20%; left:20%;}
+  label{color:white}
 
 
   /*1280px~1599px*/
@@ -41,7 +65,7 @@
       position:absolute; top:0%; left:40%; width:350px; height:50px; font-size: 30px;
     }
     nav {width:100%; margin-left:0%;}
-    section{width:50%; margin-left:25%; margin-top:5%; height:500px;background:url(../assets/shoess.jpg) 0px 0px;
+    section{width:50%; margin-left:25%; margin-top:5%; height:500px;
       background-size: contain;}
   }
 
