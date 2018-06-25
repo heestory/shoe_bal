@@ -20,7 +20,7 @@
             <router-link tag='a' to="/register" class="nav-link"> 발매등록 </router-link>  
           </li>
           <li class="nav-item">
-            <router-link tag='a' to="/brand" class="nav-link"> 브랜드관리 </router-link>  
+            <router-link tag='a' to="/brand" class="nav-link"> 브랜드/상점 관리 </router-link>  
           </li>
           <li class="nav-item">
             <router-link tag='a' to="/list" class="nav-link"> List </router-link>
