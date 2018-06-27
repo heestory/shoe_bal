@@ -7,9 +7,11 @@ import Register from '@/components/AdminRegister'
 import List from '@/components/AdminList'
 import Brand from '@/components/AdminBrand'
 import BootstrapVue from 'bootstrap-vue'
+import VueAxios from 'vue-axios'
+import axios from 'axios'
 
 
-
+Vue.use(VueAxios, axios)
 Vue.use(Router)
 Vue.use(BootstrapVue)
 

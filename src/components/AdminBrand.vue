@@ -9,13 +9,13 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               
-              <input type="text" class="form-control" id="cc-name" placeholder="브랜드명을 입력하세요" required="">
+              <input type="text" class="form-control" id="cc-name" placeholder="브랜드명을 입력하세요" required="" v-model="brandName">
               <div class="invalid-feedback">
                 Name on card is required
               </div>
             </div>
             <div class="col-md-6 mb-3">
-               <button class="btn btn-primary btn-sm" type="submit">저장</button>
+               <button class="btn btn-primary btn-sm" type="submit" v-on:click="saveBrandData">저장</button>
                <button class="btn btn-danger btn-sm" type="submit">삭제</button>
             </div>
           </div>
@@ -29,10 +29,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                 <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
-                  <td>1</td>
-                  <td>브랜드명</td>
+                <tr v-for="brand in brands">
+                 <td>
+                  <div class="checkbox checkbox-success">
+                    <input type="checkbox" id="checkbox1" class="styled"><label></label>
+                  </div>
+                </td>
+                  <td>{{brand.id}}</td>
+                  <td>{{brand.name}}</td>
                 </tr>
               </tbody>
             </table>
@@ -44,23 +48,50 @@
             <h4 class="mb-3">상점 등록</h4>
 
             <div class="row">
-              <div class="col-md-4">
-                <select class="custom-select d-block w-100" id="shopCountry" required="" v-model="shopCountry">
-                  <option value="">선택하세요</option>
-                  <option>서울</option>
-                  <option>경기</option>
+              <div class="col-md-3">
+                <select class="custom-select" v-model="brandSelect" :required="true">
+                  <option selected>선택하세요</option>
+                  <option v-for="brand in brands" v-bind:value="brand.id">{{brand.name}}</option>
                 </select>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 
-                <input type="text" class="form-control" id="cc-name" placeholder="브랜드명을 입력하세요" required="">
+                <input type="text" class="form-control" v-model="storeName" placeholder="상점을 입력하세요" required="">
                 <div class="invalid-feedback">
                   Name on card is required
                 </div>
               </div>
-              <div class="col-md-4">
-                 <button class="btn btn-primary btn-sm" type="submit">저장</button>
+              <div class="col-md-3">
+                
+                <input type="number" class="form-control" v-model="longitude" placeholder="경도" value = "0"required="">
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-3">
+                
+                <input type="number" class="form-control" v-model="latitude" placeholder="위도" value = "0" required="">
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              
+              
+            </div>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-3">
+                
+                <input type="number" class="form-control" v-model="tel" placeholder="전화번호입력" required="">
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-3 text-right">
+                 <button class="btn btn-primary btn-sm" type="submit" v-on:click="saveStoreData">저장</button>
                  <button class="btn btn-danger btn-sm" type="submit">삭제</button>
               </div>
             </div>
@@ -70,17 +101,17 @@
                 <thead>
                   <tr>
                     <th></th>
-                    <th>번호</th>
-                    <th>브랜드명</th>
-                    <th>지점</th>
+                    <th>상점아이디</th>
+                    <th>상점이름</th>
+                    <th>상점번호</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for="store in stores">
                    <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
-                    <td>1</td>
-                    <td>Nike</td>
-                    <td>강동점</td>
+                    <td>{{store.id}}</td>
+                    <td>{{store.name}}</td>
+                    <td>{{store.tel}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -95,10 +126,73 @@
 
   export default {
       name: "admin-brand",
+      mounted() {
+        this.getBrandData();
+        this.getStoreData();
+      },
+      methods:{
+        getBrandData(){
+          this.axios.get('http://10.19.1.121:8083/brands')
+          .then((response) => {
+            this.brands = response.data
+          })  
+          .catch(e => {
+            this.errors.push(e)
+          })
+        },
+        getStoreData(){
+          this.axios.get('http://10.19.1.121:8083/stores')
+          .then((response) => {
+            this.stores = response.data
+          })  
+          .catch(e => {
+            this.errors.push(e)
+          })
+        },
+        saveBrandData(){
+          this.axios.post('http://10.19.1.121:8083/brands',{
+            name : this.brandName
+          })
+          .then((response) => {
+            if(response.status == '200'){
+              this.getBrandData();
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+        },
+        saveStoreData(){
+          this.axios.post('http://10.19.1.121:8083/brands/'+this.brandSelect+'/stores',{
+              latitude: this.latitude,
+              longitude: this.longitude,
+              name :this.storeName,
+              tel: this.tel
+          })
+          .then((response) => {
+            if(response.status == '200'){
+              this.getStoreData();
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+        }
+
+      },
       data(){
       	return {
-	        
+	        brands : '',
+          stores : '',
+          brandName: '',
+          errors:[],
+          brandSelect:'',
+          latitude : '',
+          longitude:'',
+          storeName:'',
+          tel:''
 	    }
+      
 	  }
 	 
   }
