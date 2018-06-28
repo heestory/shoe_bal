@@ -3,7 +3,7 @@
    
     <section>
       <figure class="vid">
-        <video loop autoplay>
+        <video loop autoplay muted>
           <source src="../assets/nike.mp4" type="video/mp4"/>
         </video>
 

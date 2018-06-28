@@ -50,7 +50,7 @@
             <div class="row">
               <div class="col-md-3">
                 <select class="custom-select" v-model="brandSelect" :required="true">
-                  <option selected>선택하세요</option>
+                  <option value="">브랜드</option>
                   <option v-for="brand in brands" v-bind:value="brand.id">{{brand.name}}</option>
                 </select>
               </div>
@@ -82,12 +82,13 @@
 
             <br/>
 
-            <div class="row">
-              <div class="col-md-3">
-                
-                <input type="number" class="form-control" v-model="tel" placeholder="전화번호입력" required="">
-                <div class="invalid-feedback">
-                  Name on card is required
+            <div class="row container">
+               <div class="mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Tel</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="" required="" v-model="tel">
                 </div>
               </div>
               <div class="col-md-3 text-right">
@@ -155,7 +156,10 @@
           })
           .then((response) => {
             if(response.status == '200'){
+              alert('저장 되었습니다.');
               this.getBrandData();
+            }else{
+              alert('저장 실패 되었습니다.');
             }
           })
           .catch(e => {
@@ -171,7 +175,10 @@
           })
           .then((response) => {
             if(response.status == '200'){
+              alert('저장 되었습니다.');
               this.getStoreData();
+            }else{
+              alert('저장 실패 되었습니다.');
             }
           })
           .catch(e => {
@@ -191,8 +198,7 @@
           longitude:'',
           storeName:'',
           tel:''
-	    }
-      
+	    } 
 	  }
 	 
   }

@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link tag='a' to="/dash" class="nav-link"> About </router-link>            
+            <router-link tag='a' to="/dash" class="nav-link"> shoebalimi? </router-link>            
           </li>
           <li class="nav-item">
             <router-link tag='a' to="/register" class="nav-link"> 발매등록 </router-link>  
@@ -23,10 +23,10 @@
             <router-link tag='a' to="/brand" class="nav-link"> 브랜드/상점 관리 </router-link>  
           </li>
           <li class="nav-item">
-            <router-link tag='a' to="/list" class="nav-link"> List </router-link>
+            <router-link tag='a' to="/list" class="nav-link"> 발매리스트 </router-link>
           </li>
           <li class="nav-item">
-            <router-link tag='a' to="/" class="nav-link"> Logout </router-link>
+            <router-link tag='a' to="/" class="nav-link"> 로그아웃 </router-link>
           </li>
         </ul>
       </div>
