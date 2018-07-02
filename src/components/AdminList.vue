@@ -44,6 +44,8 @@
 	import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css' 
 
+	const BASE_URL = 'http://13.209.64.156:8083';
+
     export default {
         name: "admin-dash",
         mounted(){
@@ -51,11 +53,11 @@
         },
         methods:{
         	getReleaseData(){
-        		this.axios.get('http://10.19.1.121:8083/shoes')
+        		this.axios.get(BASE_URL+'/shoes')
         			.then((response) => {this.releases = response.data})
         	},
         	contentDelete(id){
-        		this.axios.delete('http://10.19.1.121:8083/shoes/'+id)
+        		this.axios.delete(BASE_URL+'/shoes/'+id)
         			.then(response => {
         				if(response.status == '200'){
 			              alert('삭제 되었습니다.');

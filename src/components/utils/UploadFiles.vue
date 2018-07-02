@@ -3,7 +3,7 @@
 		<form enctype="multiplart/form-data" novalidate v-if="isInitial || isSaving">
 			
 			<div class="dropbox">
-				<input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
+				<input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="" class="input-file">
 				 <p v-if="isInitial">
 	              업로드할 이미지를 드래그 하세요.
 	            </p>
@@ -50,9 +50,11 @@
   			uploadedFileds: [],
   			uploadError: null,
   			currentStatus:null,
-  			uploadFieldName: 'photos'
+  			uploadFieldName: 'images'
+  			
   		}
   	},
+  	props : ['id'],
   	computed:{
   		isInitial(){
   			return this.currentStatus == STATUS_INITIAL;
@@ -76,8 +78,8 @@
   		save(formData){
 
   			this.currentStatus = STATUS_SAVING;
-
-  			upload(formData)
+  			debugger
+  			upload(formData, this.id)
 	          .then(x => {
 	            this.uploadedFiles = [].concat(x);
 	            this.currentStatus = STATUS_SUCCESS;
@@ -98,8 +100,12 @@
   			Array
   				.from(Array(fileList.length).keys())
   				.map(x => {
+  					
   					formData.append(fieldName, fileList[x], fileList[x].name);
   				});
+  			;
+  			// save it
+        	this.save(formData);
   		}
   	},
   	mounted(){

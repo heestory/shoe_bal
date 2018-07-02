@@ -39,16 +39,26 @@
 		      <textarea class="form-control" rows="5" id="comment" name="text" v-model="content"></textarea>
 		    </div>
 		 
-
+        <button class="btn btn-primary btn-lg btn-block" type="submit" v-on:click="saveContentData">저장</button>
 			 
 		    <br/>
 
         
-			    <label for="exampleFormControlFile1">발매 이미지</label>
-			    <upLoadComponent/>
+			    <h2>발매 이미지 등록</h2>
+          <p class="text-danger">발매 번호선택은 필수 입니다.</p>
+          <div class="row">
+            <div class="col-md-4">
+              <select class="custom-select d-block w-100" id="" required="" v-model="releaseName">
+                <option value="">발매번호</option>
+                <option v-for="release in releases" v-bind:value="release.id">{{release.name}}</option>
+              </select>
+
+            </div>
+          </div>
+			    <upLoadComponent v-bind:id="releaseName"/>
         <br/>			
 
-            <button class="btn btn-primary btn-lg btn-block" type="submit" v-on:click="saveContentData">저장</button>
+            
    
 	</div>
 </template>
@@ -62,14 +72,17 @@
   	//Import date picker css
   	import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';	
 
+    const BASE_URL = 'http://13.209.64.156:8083';
+
     export default {
         name: "admin-dash",
         mounted(){
           this.getStoreData();
+          this.getReleaseData();
         },
         methods:{
          getStoreData(){
-            this.axios.get('http://10.19.1.121:8083/stores')
+            this.axios.get(BASE_URL+'/stores')
             .then((response) => {
               this.stores = response.data
             })  
@@ -78,7 +91,7 @@
             })
           },
           saveContentData(){
-            var url = 'http://10.19.1.121:8083/stores/'+this.storeName+'/shoes';
+            var url = BASE_URL+this.storeName+'/shoes';
             this.axios.post(url, {
               contents : this.content,
               launchDate : this.startDate,
@@ -94,6 +107,10 @@
               }  
             })
 
+          },
+          getReleaseData(){
+            this.axios.get(BASE_URL+'/shoes')
+              .then((response) => {this.releases = response.data})
           }
         },
         data(){
@@ -108,7 +125,9 @@
 		        contentTitle:'',
             content:'',
             stores:'',
-            contentPrice:''
+            contentPrice:'',
+            releases:'',
+            releaseName:''
 
 		    }
 		  },

@@ -125,6 +125,8 @@
 	import 'bootstrap/dist/css/bootstrap.css'
   import 'bootstrap-vue/dist/bootstrap-vue.css' 
 
+  const BASE_URL = 'http://13.209.64.156:8083';
+
   export default {
       name: "admin-brand",
       mounted() {
@@ -133,7 +135,7 @@
       },
       methods:{
         getBrandData(){
-          this.axios.get('http://10.19.1.121:8083/brands')
+          this.axios.get(BASE_URL+'/brands')
           .then((response) => {
             this.brands = response.data
           })  
@@ -142,7 +144,7 @@
           })
         },
         getStoreData(){
-          this.axios.get('http://10.19.1.121:8083/stores')
+          this.axios.get(BASE_URL+'/stores')
           .then((response) => {
             this.stores = response.data
           })  
@@ -151,7 +153,7 @@
           })
         },
         saveBrandData(){
-          this.axios.post('http://10.19.1.121:8083/brands',{
+          this.axios.post(BASE_URL+'/brands',{
             name : this.brandName
           })
           .then((response) => {
@@ -167,7 +169,7 @@
           })
         },
         saveStoreData(){
-          this.axios.post('http://10.19.1.121:8083/brands/'+this.brandSelect+'/stores',{
+          this.axios.post(BASE_URL+'/brands/'+this.brandSelect+'/stores',{
               latitude: this.latitude,
               longitude: this.longitude,
               name :this.storeName,
