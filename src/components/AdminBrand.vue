@@ -104,6 +104,7 @@
                     <th></th>
                     <th>상점아이디</th>
                     <th>상점이름</th>
+                    <th>브랜드명</th>
                     <th>상점번호</th>
                   </tr>
                 </thead>
@@ -112,6 +113,7 @@
                    <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
                     <td>{{store.id}}</td>
                     <td>{{store.name}}</td>
+                    <td>{{store.brand.name}}</td>
                     <td>{{store.tel}}</td>
                   </tr>
                 </tbody>

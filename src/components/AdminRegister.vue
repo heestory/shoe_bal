@@ -8,7 +8,7 @@
                 <label for="country">상점명</label>
                 <select class="custom-select d-block w-100" id="storeName" required="" v-model="storeName">
                   <option value="">선택하세요</option>
-                  <option v-for="store in stores" v-bind:value="store.id">{{store.name}}</option>
+                  <option v-for="store in stores" v-bind:value="store.id">{{store.name}}({{store.brand.name}})</option>
                 </select>
                 <div class="invalid-feedback">
                   Please select a valid country.
@@ -47,7 +47,7 @@
 			    <h2>발매 이미지 등록</h2>
           <p class="text-danger">발매 번호선택은 필수 입니다.</p>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
               <select class="custom-select d-block w-100" id="" required="" v-model="releaseName">
                 <option value="">발매번호</option>
                 <option v-for="release in releases" v-bind:value="release.id">{{release.name}}</option>
@@ -91,7 +91,7 @@
             })
           },
           saveContentData(){
-            var url = BASE_URL+this.storeName+'/shoes';
+            var url = BASE_URL+'/stores/'+this.storeName+'/shoes';
             this.axios.post(url, {
               contents : this.content,
               launchDate : this.startDate,

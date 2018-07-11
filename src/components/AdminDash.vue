@@ -8,7 +8,7 @@
           <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../assets/shoes.png" alt="">
         </span>
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="dropdown-toggle" type="button" data-toggle="dropdown" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
 
         </span>
